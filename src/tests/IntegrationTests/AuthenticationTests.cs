@@ -240,7 +240,7 @@ public sealed class AuthenticationTests
             clock);
 
     private static Task<byte[]> ListAsync(DjeClient client) =>
-        client.Comunicação.ObterComunicacoesOrgaoPublicoAsync(TenantId, ObterComunicacoesOrgaoPublicoStatusCiente.N);
+        client.Comunicacao.ObterComunicacoesOrgaoPublicoAsync(TenantId, ObterComunicacoesOrgaoPublicoStatusCiente.N);
 
     private sealed record RecordedRequest(
         HttpMethod Method,

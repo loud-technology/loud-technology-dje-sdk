@@ -23,7 +23,7 @@ public sealed class LiveTests
             credentials,
             new Uri(OptionalEnvironmentVariable("DJE_BASE_URL") ?? DjeClient.DefaultBaseUrl));
 
-        var body = await client.Comunicação.ObterComunicacoesOrgaoPublicoAsync(
+        var body = await client.Comunicacao.ObterComunicacoesOrgaoPublicoAsync(
             tenantId,
             ObterComunicacoesOrgaoPublicoStatusCiente.N,
             page: 0,

@@ -68,7 +68,7 @@ namespace Loud.Technology.Dje.Sdk
         /// <summary>
         ///
         /// </summary>
-        public ComunicaçãoClient Comunicação { get; }
+        public ComunicacaoClient Comunicacao { get; }
 
         /// <summary>
         ///
@@ -93,17 +93,17 @@ namespace Loud.Technology.Dje.Sdk
         /// <summary>
         ///
         /// </summary>
-        public NotificaçõesClient Notificações { get; }
+        public NotificacoesClient Notificacoes { get; }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public OrgaoPublicoClient OrgaoPublico { get; }
 
         /// <summary>
         ///
         /// </summary>
         public OrgaoPublicoControllerClient OrgaoPublicoController { get; }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public OrgãoPúblicoClient OrgãoPúblico { get; }
 
         /// <summary>
         ///
@@ -123,17 +123,17 @@ namespace Loud.Technology.Dje.Sdk
         /// <summary>
         ///
         /// </summary>
+        public PessoaFisicaClient PessoaFisica { get; }
+
+        /// <summary>
+        ///
+        /// </summary>
         public PessoaFisicaRestControllerClient PessoaFisicaRestController { get; }
 
         /// <summary>
         ///
         /// </summary>
-        public PessoaFísicaClient PessoaFísica { get; }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public PessoaJúridicaClient PessoaJúridica { get; }
+        public PessoaJuridicaClient PessoaJuridica { get; }
 
         /// <summary>
         ///
@@ -148,7 +148,7 @@ namespace Loud.Technology.Dje.Sdk
         /// <summary>
         ///
         /// </summary>
-        public SolicitaçãoDeVínculoClient SolicitaçãoDeVínculo { get; }
+        public SolicitacaoDeVinculoClient SolicitacaoDeVinculo { get; }
 
         /// <summary>
         ///
@@ -163,7 +163,7 @@ namespace Loud.Technology.Dje.Sdk
         /// <summary>
         ///
         /// </summary>
-        public UsuárioClient Usuário { get; }
+        public UsuarioClient Usuario { get; }
 
     }
 }

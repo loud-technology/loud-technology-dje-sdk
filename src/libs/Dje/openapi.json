@@ -54,7 +54,7 @@
     "/api/v1/processos/{numeroProcesso}/comunicacoes/{numeroComunicacao}": {
       "put": {
         "tags": [
-          "Comunicação"
+          "Comunicacao"
         ],
         "summary": "Obter inteiro teor de uma comunicação.",
         "description": "Obter inteiro teor de uma comunicação.",
@@ -632,7 +632,7 @@
     "/api/v1/matriz/{idMatrizSolicitante}/solicitacoes-vinculos/{idSolicitacao}": {
       "put": {
         "tags": [
-          "Solicitação de Vínculo"
+          "Solicitacao de Vinculo"
         ],
         "summary": "Alterar solicitação de coligação.",
         "description": "Alterar solicitação de coligação.",
@@ -996,7 +996,7 @@
     "/api/v1/pessoas-fisicas": {
       "get": {
         "tags": [
-          "Pessoa Física"
+          "Pessoa Fisica"
         ],
         "summary": "Obter lista de pessoas físicas.",
         "description": "Obter lista de pessoas físicas.",
@@ -1108,7 +1108,7 @@
       },
       "post": {
         "tags": [
-          "Pessoa Física"
+          "Pessoa Fisica"
         ],
         "summary": "Adicionar uma pessoa física.",
         "description": "Adicionar uma pessoa física.",
@@ -1393,7 +1393,7 @@
     "/api/v1/orgaos-publicos/{id}/vinculos": {
       "get": {
         "tags": [
-          "Orgão Público"
+          "Orgao Publico"
         ],
         "summary": "Obter um orgãos públicos por id.",
         "description": "Obter um orgãos públicos por id.",
@@ -1455,7 +1455,7 @@
       },
       "post": {
         "tags": [
-          "Orgão Público"
+          "Orgao Publico"
         ],
         "summary": "Criar solicitação de vinculo com orgao publico com a matriz informada.",
         "description": "Criar solicitação de vinculo com orgao publico com a matriz informada. Ela deve confirmar/rejeitar o vínculo.",
@@ -2073,7 +2073,7 @@
       },
       "post": {
         "tags": [
-          "Solicitação de Vínculo"
+          "Solicitacao de Vinculo"
         ],
         "summary": "Criar solicitação de coligação com a matriz informada.",
         "description": "Criar solicitação de coligação com a matriz informada. Ela deve confirmar/rejeitar o vínculo.",
@@ -2615,7 +2615,7 @@
     "/api/v1/pessoas-fisicas/{id}": {
       "get": {
         "tags": [
-          "Pessoa Física"
+          "Pessoa Fisica"
         ],
         "summary": "Obter uma pessoa física pelo id.",
         "description": "Obter uma pessoa física pelo id.",
@@ -2721,7 +2721,7 @@
       },
       "delete": {
         "tags": [
-          "Pessoa Física"
+          "Pessoa Fisica"
         ],
         "summary": "Remover uma pessoa física pelo id.",
         "description": "Remover uma pessoa física pelo id.",
@@ -2827,7 +2827,7 @@
       },
       "patch": {
         "tags": [
-          "Pessoa Física"
+          "Pessoa Fisica"
         ],
         "summary": "Alterar uma pessoa física.",
         "description": "Alterar uma pessoa física.",
@@ -3673,7 +3673,7 @@
     "/api/v1/processos/{numeroProcesso}/logs": {
       "get": {
         "tags": [
-          "Comunicação"
+          "Comunicacao"
         ],
         "summary": "Obter logs de um processo especifico por numero de processo.",
         "description": "Obter logs de um processo especifico por numero de processo.",
@@ -4203,7 +4203,7 @@
     "/api/v1/pessoas-juridicas": {
       "get": {
         "tags": [
-          "Pessoa Júridica"
+          "Pessoa Juridica"
         ],
         "summary": "Obter lista de pessoas juridicas a partir de um filtro.",
         "description": "Obter lista de pessoas juridicas a partir de um filtro.",
@@ -4317,7 +4317,7 @@
     "/api/v1/pessoas-juridicas/{id}": {
       "get": {
         "tags": [
-          "Pessoa Júridica"
+          "Pessoa Juridica"
         ],
         "summary": "Obter uma pessoa juridica por id.",
         "description": "Obter uma pessoa juridica por id.",
@@ -4670,7 +4670,7 @@
     "/api/v1/orgaos-publicos/{idOrgao}/representantes": {
       "get": {
         "tags": [
-          "Orgão Público"
+          "Orgao Publico"
         ],
         "summary": "Obter vinculos dos representantes de um orgão público representado.",
         "description": "Obter vinculos dos representantes de um orgão público representado.",
@@ -4735,7 +4735,7 @@
     "/api/v1/notificacoes": {
       "get": {
         "tags": [
-          "Notificações"
+          "Notificacoes"
         ],
         "summary": "Obter lista de notificações.",
         "description": "Obter lista de notificações.",
@@ -5101,7 +5101,7 @@
     "/api/v1/matriz/{idMatriz}/solicitacoes-vinculos/{idSolicitacao}": {
       "get": {
         "tags": [
-          "Solicitação de Vínculo"
+          "Solicitacao de Vinculo"
         ],
         "summary": "Obter detalhes solicitação.",
         "description": "Obter detalhes solicitação.",
@@ -5217,7 +5217,7 @@
       },
       "delete": {
         "tags": [
-          "Solicitação de Vínculo"
+          "Solicitacao de Vinculo"
         ],
         "summary": "Cancelar solicitação com status pendente.",
         "description": "Cancelar solicitação com status pendente.",
@@ -5729,7 +5729,7 @@
     "/api/v1/eu": {
       "get": {
         "tags": [
-          "Usuário"
+          "Usuario"
         ],
         "summary": "Obter informações do usuário logado.",
         "description": "Obter informações do usuário logado.",
@@ -5756,7 +5756,7 @@
     "/api/v1/comunicacoes": {
       "get": {
         "tags": [
-          "Comunicação"
+          "Comunicacao"
         ],
         "summary": "Obter lista de comunicações.",
         "description": "Obter lista de comunicações.",
@@ -6035,7 +6035,7 @@
     "/api/v1/comunicacoes/orgaos-publicos": {
       "get": {
         "tags": [
-          "Comunicação"
+          "Comunicacao"
         ],
         "summary": "Obter lista de comunicações com informações de orgãos publicos.",
         "description": "Obter lista de comunicações com informações de orgãos publicos.",
@@ -6920,7 +6920,7 @@
     "/api/v1/orgaos-publicos/{id}/vinculos/{idSolicitacao}/inativar-vinculo": {
       "delete": {
         "tags": [
-          "Orgão Público"
+          "Orgao Publico"
         ],
         "summary": "Inativar vinculo com orgao solicitado.",
         "description": "Inativar vinculo com orgao solicitado.",
@@ -6978,7 +6978,7 @@
     "/api/v1/orgaos-publicos/{id}/vinculos/{idSolicitacao}/cancelar-vinculo": {
       "delete": {
         "tags": [
-          "Orgão Público"
+          "Orgao Publico"
         ],
         "summary": "Cancelar vinculo com orgao solicitado.",
         "description": "Cancelar vinculo com orgao solicitado.",

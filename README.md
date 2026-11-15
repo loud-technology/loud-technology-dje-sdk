@@ -81,7 +81,7 @@ using var client = DjeClient.CreateWithClientCredentials(credentials);
 
 var tenantId = Guid.Parse(Environment.GetEnvironmentVariable("DJE_TENANT_ID")!);
 
-var listing = await client.Comunicação.ObterComunicacoesOrgaoPublicoAsync(
+var listing = await client.Comunicacao.ObterComunicacoesOrgaoPublicoAsync(
     tenantId,
     ObterComunicacoesOrgaoPublicoStatusCiente.N,
     dataInicio: DateTime.UtcNow.AddDays(-1),
@@ -145,16 +145,16 @@ using var fromEnvironment = DjeClient.CreateFromEnvironment();
 ```csharp
 client.AdesaoController;               client.AdminEmpresaIncorporadaController;
 client.CadastroCompulsorio;            client.Coligada;
-client.Comunicação;                    client.EmpresaIncorporada;
+client.Comunicacao;                    client.EmpresaIncorporada;
 client.ExportarPessoas;                client.Filial;
-client.Matriz;                         client.Notificações;
-client.OrgaoPublicoController;         client.OrgãoPúblico;
+client.Matriz;                         client.Notificacoes;
+client.OrgaoPublicoController;         client.OrgaoPublico;
 client.Pdpj;                           client.Perfil;
 client.Pessoa;                         client.PessoaFisicaRestController;
-client.PessoaFísica;                   client.PessoaJúridica;
+client.PessoaFisica;                   client.PessoaJuridica;
 client.PessoaTermo;                    client.Representantes;
-client.SolicitaçãoDeVínculo;           client.TermoDeAceite;
-client.Ticket;                         client.Usuário;
+client.SolicitacaoDeVinculo;           client.TermoDeAceite;
+client.Ticket;                         client.Usuario;
 ```
 
 Three behaviors of the generated operations matter in practice.
@@ -173,7 +173,7 @@ cd src/libs/Dje
 ./generate.sh
 ```
 
-The script downloads `https://gateway.stg.cloud.pje.jus.br/domicilio-eletronico-hml/v3/api-docs` into `openapi.json`, replaces `Generated/`, and creates a .NET 10 client with Bearer authentication. The gateway returns some schema properties in a different order on each request. `apply-openapi-overrides.py` sorts them so that two runs against an unchanged specification produce identical files.
+The script downloads `https://gateway.stg.cloud.pje.jus.br/domicilio-eletronico-hml/v3/api-docs` into `openapi.json`, replaces `Generated/`, and creates a .NET 10 client with Bearer authentication. The gateway returns some schema properties in a different order on each request. `apply-openapi-overrides.py` sorts them so that two runs against an unchanged specification produce identical files. It also removes the accents from the tag names, so the tag `Comunicação` becomes `client.Comunicacao`.
 
 ```text
 Loud.Technology.Dje.Sdk.slnx

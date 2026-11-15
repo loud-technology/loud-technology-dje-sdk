@@ -86,7 +86,7 @@ namespace Loud.Technology.Dje.Sdk
         /// <summary>
         ///
         /// </summary>
-        public ComunicaçãoClient Comunicação => new ComunicaçãoClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
+        public ComunicacaoClient Comunicacao => new ComunicacaoClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContextProvider = JsonSerializerContextProvider,
@@ -131,7 +131,16 @@ namespace Loud.Technology.Dje.Sdk
         /// <summary>
         ///
         /// </summary>
-        public NotificaçõesClient Notificações => new NotificaçõesClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
+        public NotificacoesClient Notificacoes => new NotificacoesClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
+        {
+            ReadResponseAsString = ReadResponseAsString,
+            JsonSerializerContextProvider = JsonSerializerContextProvider,
+        };
+
+        /// <summary>
+        ///
+        /// </summary>
+        public OrgaoPublicoClient OrgaoPublico => new OrgaoPublicoClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContextProvider = JsonSerializerContextProvider,
@@ -141,15 +150,6 @@ namespace Loud.Technology.Dje.Sdk
         ///
         /// </summary>
         public OrgaoPublicoControllerClient OrgaoPublicoController => new OrgaoPublicoControllerClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
-        {
-            ReadResponseAsString = ReadResponseAsString,
-            JsonSerializerContextProvider = JsonSerializerContextProvider,
-        };
-
-        /// <summary>
-        ///
-        /// </summary>
-        public OrgãoPúblicoClient OrgãoPúblico => new OrgãoPúblicoClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContextProvider = JsonSerializerContextProvider,
@@ -185,6 +185,15 @@ namespace Loud.Technology.Dje.Sdk
         /// <summary>
         ///
         /// </summary>
+        public PessoaFisicaClient PessoaFisica => new PessoaFisicaClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
+        {
+            ReadResponseAsString = ReadResponseAsString,
+            JsonSerializerContextProvider = JsonSerializerContextProvider,
+        };
+
+        /// <summary>
+        ///
+        /// </summary>
         public PessoaFisicaRestControllerClient PessoaFisicaRestController => new PessoaFisicaRestControllerClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
@@ -194,16 +203,7 @@ namespace Loud.Technology.Dje.Sdk
         /// <summary>
         ///
         /// </summary>
-        public PessoaFísicaClient PessoaFísica => new PessoaFísicaClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
-        {
-            ReadResponseAsString = ReadResponseAsString,
-            JsonSerializerContextProvider = JsonSerializerContextProvider,
-        };
-
-        /// <summary>
-        ///
-        /// </summary>
-        public PessoaJúridicaClient PessoaJúridica => new PessoaJúridicaClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
+        public PessoaJuridicaClient PessoaJuridica => new PessoaJuridicaClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContextProvider = JsonSerializerContextProvider,
@@ -230,7 +230,7 @@ namespace Loud.Technology.Dje.Sdk
         /// <summary>
         ///
         /// </summary>
-        public SolicitaçãoDeVínculoClient SolicitaçãoDeVínculo => new SolicitaçãoDeVínculoClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
+        public SolicitacaoDeVinculoClient SolicitacaoDeVinculo => new SolicitacaoDeVinculoClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContextProvider = JsonSerializerContextProvider,
@@ -257,7 +257,7 @@ namespace Loud.Technology.Dje.Sdk
         /// <summary>
         ///
         /// </summary>
-        public UsuárioClient Usuário => new UsuárioClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
+        public UsuarioClient Usuario => new UsuarioClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContextProvider = JsonSerializerContextProvider,

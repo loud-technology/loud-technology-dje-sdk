@@ -33,7 +33,7 @@ public sealed class ClientTests
             new Uri("https://dje.example.com/gateway"),
             disposeHttpClient: false);
 
-        await client.Comunicação.ObterComunicacoesOrgaoPublicoAsync(
+        await client.Comunicacao.ObterComunicacoesOrgaoPublicoAsync(
             TenantId,
             ObterComunicacoesOrgaoPublicoStatusCiente.N,
             dataInicio: new DateTime(2026, 1, 2, 3, 4, 5, DateTimeKind.Utc),
@@ -62,7 +62,7 @@ public sealed class ClientTests
         using var httpClient = new HttpClient(handler);
         using var client = new DjeClient("test-access-token", httpClient, disposeHttpClient: false);
 
-        var call = () => client.Comunicação.ObterComunicacoesOrgaoPublicoAsync(
+        var call = () => client.Comunicacao.ObterComunicacoesOrgaoPublicoAsync(
             TenantId,
             ObterComunicacoesOrgaoPublicoStatusCiente.N);
 
