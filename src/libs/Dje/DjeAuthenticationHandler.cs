@@ -1,6 +1,6 @@
 using System.Net;
 using System.Net.Http.Headers;
-using System.Text.Json;
+using System.Net.Http.Json;
 
 namespace Loud.Technology.Dje.Sdk;
 
@@ -139,29 +139,18 @@ internal sealed class DjeAuthenticationHandler : DelegatingHandler
 
         var issuedAt = _timeProvider.GetTimestamp();
         using var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
-        if (!response.IsSuccessStatusCode)
-        {
-            throw new HttpRequestException(
-                $"The DJE token request failed with {(int)response.StatusCode} {response.StatusCode}.",
-                inner: null,
-                response.StatusCode);
-        }
+        response.EnsureSuccessStatusCode();
 
-        var body = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
-        using var document = await JsonDocument.ParseAsync(body, cancellationToken: cancellationToken).ConfigureAwait(false);
-        var root = document.RootElement;
-        var accessToken = root.TryGetProperty("access_token", out var value) && value.ValueKind == JsonValueKind.String
-            ? value.GetString()
-            : null;
-        if (string.IsNullOrEmpty(accessToken))
+        var token = await response.Content
+            .ReadFromJsonAsync(DjeTokenJsonContext.Default.DjeTokenResponse, cancellationToken)
+            .ConfigureAwait(false);
+        if (token?.AccessToken is not { Length: > 0 } accessToken)
         {
             throw new HttpRequestException("The DJE token response has no access_token.");
         }
 
-        var expiresIn = root.TryGetProperty("expires_in", out var seconds) && seconds.TryGetInt32(out var parsed)
-            ? parsed
-            : DefaultTokenLifetimeSeconds;
-        return new CachedToken(accessToken, issuedAt, TimeSpan.FromSeconds(expiresIn) - RenewalMargin);
+        var lifetime = TimeSpan.FromSeconds(token.ExpiresIn ?? DefaultTokenLifetimeSeconds);
+        return new CachedToken(accessToken, issuedAt, lifetime - RenewalMargin);
     }
 
     private sealed record CachedToken(string Value, long IssuedAt, TimeSpan Lifetime)
