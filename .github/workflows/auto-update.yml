@@ -1,0 +1,51 @@
+name: Update DJE OpenAPI SDK
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    name: Regenerate SDK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out source and tags
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Regenerate from the latest DJE specification
+        working-directory: src/libs/Dje
+        run: ./generate.sh
+
+      - name: Build generated SDK
+        run: dotnet build Loud.Technology.Dje.Sdk.slnx --configuration Release
+
+      - name: Run tests
+        run: dotnet test Loud.Technology.Dje.Sdk.slnx --configuration Release --no-build --logger GitHubActions
+
+      - name: Open update pull request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/update-dje-openapi
+          delete-branch: true
+          commit-message: 'chore: update DJE OpenAPI SDK'
+          title: 'chore: update DJE OpenAPI SDK'
+          body: |
+            Automated regeneration from the latest DJE OpenAPI specification.
+
+            - Generated with the pinned AutoSDK version from `generate.sh`
+            - Built and tested in Release configuration
+          labels: dependencies,automated
