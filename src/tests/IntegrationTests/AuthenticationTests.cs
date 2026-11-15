@@ -223,6 +223,63 @@ public sealed class AuthenticationTests
         server.IsDisposed.Should().BeTrue();
     }
 
+    [TestMethod]
+    public async Task TwoClientsWithOneStore_ShareOneToken()
+    {
+        var server = new FakeServer();
+        var store = new RecordingTokenStore();
+        using var first = CreateClient(server, tokenStore: store);
+        using var second = CreateClient(server, tokenStore: store);
+
+        await ListAsync(first);
+        await ListAsync(second);
+
+        server.TokenRequests.Should().ContainSingle();
+        server.ApiRequests.Should().OnlyContain(request => request.Authorization == "Bearer token-1");
+    }
+
+    [TestMethod]
+    public async Task StoredValidToken_IsSentWithoutATokenRequest()
+    {
+        var server = new FakeServer();
+        var clock = new ManualTimeProvider();
+        var store = new RecordingTokenStore { Token = new DjeAccessToken { Value = "stored", ExpiresAt = clock.GetUtcNow().AddMinutes(1) } };
+        using var client = CreateClient(server, clock, tokenStore: store);
+
+        await ListAsync(client);
+
+        server.TokenRequests.Should().BeEmpty();
+        server.ApiRequests.Should().ContainSingle().Which.Authorization.Should().Be("Bearer stored");
+    }
+
+    [TestMethod]
+    public async Task IssuedToken_IsStoredWithTheExpiryMinusSixtySeconds()
+    {
+        var server = new FakeServer(expiresInSeconds: 300);
+        var clock = new ManualTimeProvider();
+        var store = new RecordingTokenStore();
+        using var client = CreateClient(server, clock, tokenStore: store);
+
+        await ListAsync(client);
+
+        store.Token.Should().Be(new DjeAccessToken { Value = "token-1", ExpiresAt = clock.GetUtcNow().AddSeconds(240) });
+    }
+
+    [TestMethod]
+    public async Task UnauthorizedStoredToken_IsReplacedInTheStore()
+    {
+        var server = new FakeServer { ApiStatus = authorization => authorization == "Bearer stale" ? HttpStatusCode.Unauthorized : HttpStatusCode.OK };
+        var clock = new ManualTimeProvider();
+        var store = new RecordingTokenStore { Token = new DjeAccessToken { Value = "stale", ExpiresAt = clock.GetUtcNow().AddMinutes(1) } };
+        using var client = CreateClient(server, clock, tokenStore: store);
+
+        await ListAsync(client);
+
+        server.TokenRequests.Should().ContainSingle();
+        server.ApiRequests.Select(request => request.Authorization).Should().Equal("Bearer stale", "Bearer token-1");
+        store.Token!.Value.Should().Be("token-1");
+    }
+
     private static DjeClientCredentials CreateCredentials(string? scope = null) => new()
     {
         TokenUrl = TokenUrl,
@@ -232,12 +289,13 @@ public sealed class AuthenticationTests
         Scope = scope,
     };
 
-    private static DjeClient CreateClient(FakeServer server, TimeProvider? clock = null, string? scope = null) =>
+    private static DjeClient CreateClient(FakeServer server, TimeProvider? clock = null, string? scope = null, IDjeAccessTokenStore? tokenStore = null) =>
         DjeClient.CreateWithClientCredentials(
             CreateCredentials(scope),
             new Uri("https://dje.example.com/gateway"),
             server,
-            clock);
+            clock,
+            tokenStore);
 
     private static Task<byte[]> ListAsync(DjeClient client) =>
         client.Comunicacao.ObterComunicacoesOrgaoPublicoAsync(TenantId, ObterComunicacoesOrgaoPublicoStatusCiente.N);
@@ -319,6 +377,19 @@ public sealed class AuthenticationTests
             new(status) { Content = new StringContent(json, Encoding.UTF8, "application/json") };
     }
 
+    private sealed class RecordingTokenStore : IDjeAccessTokenStore
+    {
+        public DjeAccessToken? Token { get; set; }
+
+        public ValueTask<DjeAccessToken?> GetAsync(CancellationToken cancellationToken) => ValueTask.FromResult(Token);
+
+        public ValueTask SetAsync(DjeAccessToken token, CancellationToken cancellationToken)
+        {
+            Token = token;
+            return ValueTask.CompletedTask;
+        }
+    }
+
     private sealed class ManualTimeProvider : TimeProvider
     {
         private long _ticks;
@@ -326,6 +397,8 @@ public sealed class AuthenticationTests
         public override long TimestampFrequency => TimeSpan.TicksPerSecond;
 
         public override long GetTimestamp() => _ticks;
+
+        public override DateTimeOffset GetUtcNow() => DateTimeOffset.UnixEpoch.AddTicks(_ticks);
 
         public void Advance(TimeSpan elapsed) => _ticks += elapsed.Ticks;
     }
