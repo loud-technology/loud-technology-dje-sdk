@@ -66,6 +66,7 @@ Use a token limited to `read:packages`, never commit it, and authorize it for th
 ## Quick start
 
 ```csharp
+using System.Globalization;
 using System.Text.Json;
 using Loud.Technology.Dje.Sdk;
 
@@ -84,7 +85,7 @@ var tenantId = Guid.Parse(Environment.GetEnvironmentVariable("DJE_TENANT_ID")!);
 var listing = await client.Comunicacao.ObterComunicacoesOrgaoPublicoAsync(
     tenantId,
     ObterComunicacoesOrgaoPublicoStatusCiente.N,
-    dataInicio: DateTime.UtcNow.AddDays(-1),
+    dataInicio: DateTimeOffset.UtcNow.AddDays(-1).ToString("yyyy-MM-ddTHH:mm:sszzz", CultureInfo.InvariantCulture),
     page: 0,
     size: 100);
 
@@ -160,7 +161,7 @@ client.Ticket;                         client.Usuario;
 Three behaviors of the generated operations matter in practice.
 
 - **Most operations return `byte[]`.** The specification declares the success body of 56 of the 80 operations only as `*/*`, which AutoSDK generates as raw bytes. Parse them with `System.Text.Json`. 19 operations have no response body and return `Task`. The other 5 return a typed model or `bool`.
-- **Dates are sent as given.** `DateTime` parameters are formatted as `yyyy-MM-ddTHH:mm:ssZ` without converting their kind, so pass UTC values.
+- **Date-time filters are strings.** `dataInicio` and `dataFim` take an ISO 8601 value, such as `2026-10-30T00:00:00-03:00`, and the SDK sends it unchanged. The offset reaches the DJE as you wrote it.
 - **Failures throw `ApiException`.** Read `StatusCode` and `ResponseBody`. A declared error body surfaces as `ApiException<T>`, which derives from `ApiException`.
 
 ## Regenerate the SDK

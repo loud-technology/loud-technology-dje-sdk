@@ -42,8 +42,8 @@ namespace Loud.Technology.Dje.Sdk
         global::System.Threading.Tasks.Task<byte[]> ObterComunicacoesAsync(
             global::System.Guid tenantId,
             global::Loud.Technology.Dje.Sdk.ObterComunicacoesStatusCiente statusCiente,
-            global::System.DateTime? dataInicio = default,
-            global::System.DateTime? dataFim = default,
+            string? dataInicio = default,
+            string? dataFim = default,
             string? numeroProcesso = default,
             global::Loud.Technology.Dje.Sdk.ObterComunicacoesTipoComunicacao? tipoComunicacao = default,
             string? assunto = default,
@@ -96,8 +96,8 @@ namespace Loud.Technology.Dje.Sdk
         global::System.Threading.Tasks.Task<global::System.IO.Stream> ObterComunicacoesAsStreamAsync(
             global::System.Guid tenantId,
             global::Loud.Technology.Dje.Sdk.ObterComunicacoesStatusCiente statusCiente,
-            global::System.DateTime? dataInicio = default,
-            global::System.DateTime? dataFim = default,
+            string? dataInicio = default,
+            string? dataFim = default,
             string? numeroProcesso = default,
             global::Loud.Technology.Dje.Sdk.ObterComunicacoesTipoComunicacao? tipoComunicacao = default,
             string? assunto = default,
@@ -150,8 +150,8 @@ namespace Loud.Technology.Dje.Sdk
         global::System.Threading.Tasks.Task<global::Loud.Technology.Dje.Sdk.AutoSDKHttpResponse<byte[]>> ObterComunicacoesAsResponseAsync(
             global::System.Guid tenantId,
             global::Loud.Technology.Dje.Sdk.ObterComunicacoesStatusCiente statusCiente,
-            global::System.DateTime? dataInicio = default,
-            global::System.DateTime? dataFim = default,
+            string? dataInicio = default,
+            string? dataFim = default,
             string? numeroProcesso = default,
             global::Loud.Technology.Dje.Sdk.ObterComunicacoesTipoComunicacao? tipoComunicacao = default,
             string? assunto = default,

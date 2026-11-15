@@ -46,8 +46,8 @@ namespace Loud.Technology.Dje.Sdk
         global::System.Threading.Tasks.Task<byte[]> ObterComunicacoesOrgaoPublicoAsync(
             global::System.Guid tenantId,
             global::Loud.Technology.Dje.Sdk.ObterComunicacoesOrgaoPublicoStatusCiente statusCiente,
-            global::System.DateTime? dataInicio = default,
-            global::System.DateTime? dataFim = default,
+            string? dataInicio = default,
+            string? dataFim = default,
             string? numeroProcesso = default,
             global::Loud.Technology.Dje.Sdk.ObterComunicacoesOrgaoPublicoTipoComunicacao? tipoComunicacao = default,
             string? assunto = default,
@@ -105,8 +105,8 @@ namespace Loud.Technology.Dje.Sdk
         global::System.Threading.Tasks.Task<global::System.IO.Stream> ObterComunicacoesOrgaoPublicoAsStreamAsync(
             global::System.Guid tenantId,
             global::Loud.Technology.Dje.Sdk.ObterComunicacoesOrgaoPublicoStatusCiente statusCiente,
-            global::System.DateTime? dataInicio = default,
-            global::System.DateTime? dataFim = default,
+            string? dataInicio = default,
+            string? dataFim = default,
             string? numeroProcesso = default,
             global::Loud.Technology.Dje.Sdk.ObterComunicacoesOrgaoPublicoTipoComunicacao? tipoComunicacao = default,
             string? assunto = default,
@@ -164,8 +164,8 @@ namespace Loud.Technology.Dje.Sdk
         global::System.Threading.Tasks.Task<global::Loud.Technology.Dje.Sdk.AutoSDKHttpResponse<byte[]>> ObterComunicacoesOrgaoPublicoAsResponseAsync(
             global::System.Guid tenantId,
             global::Loud.Technology.Dje.Sdk.ObterComunicacoesOrgaoPublicoStatusCiente statusCiente,
-            global::System.DateTime? dataInicio = default,
-            global::System.DateTime? dataFim = default,
+            string? dataInicio = default,
+            string? dataFim = default,
             string? numeroProcesso = default,
             global::Loud.Technology.Dje.Sdk.ObterComunicacoesOrgaoPublicoTipoComunicacao? tipoComunicacao = default,
             string? assunto = default,

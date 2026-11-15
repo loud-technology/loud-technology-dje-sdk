@@ -40,10 +40,24 @@ def ascii_tags(document: dict[str, Any]) -> None:
                 operation["tags"] = [strip_accents(tag) for tag in operation["tags"]]
 
 
+def date_time_query_as_string(document: dict[str, Any]) -> None:
+    # AutoSDK formats a date-time query parameter as DateTime with a literal "Z" and drops the offset.
+    # As a string, the caller sends the exact ISO 8601 value, offset included.
+    for path_item in document.get("paths", {}).values():
+        for operation in path_item.values():
+            if not isinstance(operation, dict):
+                continue
+            for parameter in operation.get("parameters", []):
+                schema = parameter.get("schema", {})
+                if parameter.get("in") == "query" and schema.get("format") == "date-time":
+                    del schema["format"]
+
+
 def main() -> None:
     path = Path(sys.argv[1])
     document = json.loads(path.read_text(encoding="utf-8"))
     ascii_tags(document)
+    date_time_query_as_string(document)
     path.write_text(json.dumps(normalize(document), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 

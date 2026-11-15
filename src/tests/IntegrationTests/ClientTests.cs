@@ -36,8 +36,8 @@ public sealed class ClientTests
         await client.Comunicacao.ObterComunicacoesOrgaoPublicoAsync(
             TenantId,
             ObterComunicacoesOrgaoPublicoStatusCiente.N,
-            dataInicio: new DateTime(2026, 1, 2, 3, 4, 5, DateTimeKind.Utc),
-            dataFim: new DateTime(2026, 1, 3, 3, 4, 5, DateTimeKind.Utc),
+            dataInicio: "2026-01-02T00:04:05-03:00",
+            dataFim: "2026-01-03T03:04:05Z",
             page: 2,
             size: 50);
 
@@ -47,7 +47,7 @@ public sealed class ClientTests
         var query = HttpUtility.ParseQueryString(request.Uri.Query);
         query.AllKeys.Should().BeEquivalentTo("statusCiente", "dataInicio", "dataFim", "page", "size");
         query["statusCiente"].Should().Be("N");
-        query["dataInicio"].Should().Be("2026-01-02T03:04:05Z");
+        query["dataInicio"].Should().Be("2026-01-02T00:04:05-03:00");
         query["dataFim"].Should().Be("2026-01-03T03:04:05Z");
         query["page"].Should().Be("2");
         query["size"].Should().Be("50");

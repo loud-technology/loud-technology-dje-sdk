@@ -3631,8 +3631,7 @@
             "description": "Parametro para filtrar comunicações pela data, e necessário informar data fim em conjunto desse parâmetro. Padrão ISO8601",
             "required": false,
             "schema": {
-              "type": "string",
-              "format": "date-time"
+              "type": "string"
             },
             "example": "2022-06-08T00:00:00Z"
           },
@@ -3642,8 +3641,7 @@
             "description": "Parametro para filtrar comunicações pela data, e necessário informar data inicio em conjunto desse parâmetro. Padrão ISO8601. Máximo 7 dias, valores acima serão desconsiderados.",
             "required": false,
             "schema": {
-              "type": "string",
-              "format": "date-time"
+              "type": "string"
             },
             "example": "2022-06-08T23:00:00Z"
           }
@@ -5777,8 +5775,7 @@
             "description": "Parametro para filtrar comunicacoes pela data, e necessario informar data fim em conjunto desse parametro. Padrao ISO8601",
             "required": false,
             "schema": {
-              "type": "string",
-              "format": "date-time"
+              "type": "string"
             },
             "example": "2022-06-08T00:00:00Z"
           },
@@ -5788,8 +5785,7 @@
             "description": "Parametro para filtrar comunicacoes pela data, e necessario informar data inicio em conjunto desse parametro. Padrao ISO8601. Maximo 7 dias, valores acima serao desconsiderados.",
             "required": false,
             "schema": {
-              "type": "string",
-              "format": "date-time"
+              "type": "string"
             },
             "example": "2022-06-08T23:00:00Z"
           },
@@ -6056,8 +6052,7 @@
             "description": "Parametro para filtrar comunicacoes pela data, e necessario informar data fim em conjunto desse parametro. Padrao ISO8601",
             "required": false,
             "schema": {
-              "type": "string",
-              "format": "date-time"
+              "type": "string"
             },
             "example": "2022-06-08T00:00:00Z"
           },
@@ -6067,8 +6062,7 @@
             "description": "Parametro para filtrar comunicacoes pela data, e necessario informar data inicio em conjunto desse parametro. Padrao ISO8601. Maximo 7 dias, valores acima serao desconsiderados.",
             "required": false,
             "schema": {
-              "type": "string",
-              "format": "date-time"
+              "type": "string"
             },
             "example": "2022-06-08T23:00:00Z"
           },

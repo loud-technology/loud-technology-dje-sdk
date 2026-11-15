@@ -28,8 +28,8 @@ namespace Loud.Technology.Dje.Sdk
         partial void PrepareObterComunicacoesOrgaoPublicoArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref global::System.Guid tenantId,
-            ref global::System.DateTime? dataInicio,
-            ref global::System.DateTime? dataFim,
+            ref string? dataInicio,
+            ref string? dataFim,
             ref string? numeroProcesso,
             ref global::Loud.Technology.Dje.Sdk.ObterComunicacoesOrgaoPublicoTipoComunicacao? tipoComunicacao,
             ref string? assunto,
@@ -48,8 +48,8 @@ namespace Loud.Technology.Dje.Sdk
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpRequestMessage httpRequestMessage,
             global::System.Guid tenantId,
-            global::System.DateTime? dataInicio,
-            global::System.DateTime? dataFim,
+            string? dataInicio,
+            string? dataFim,
             string? numeroProcesso,
             global::Loud.Technology.Dje.Sdk.ObterComunicacoesOrgaoPublicoTipoComunicacao? tipoComunicacao,
             string? assunto,
@@ -115,8 +115,8 @@ namespace Loud.Technology.Dje.Sdk
         public async global::System.Threading.Tasks.Task<byte[]> ObterComunicacoesOrgaoPublicoAsync(
             global::System.Guid tenantId,
             global::Loud.Technology.Dje.Sdk.ObterComunicacoesOrgaoPublicoStatusCiente statusCiente,
-            global::System.DateTime? dataInicio = default,
-            global::System.DateTime? dataFim = default,
+            string? dataInicio = default,
+            string? dataFim = default,
             string? numeroProcesso = default,
             global::Loud.Technology.Dje.Sdk.ObterComunicacoesOrgaoPublicoTipoComunicacao? tipoComunicacao = default,
             string? assunto = default,
@@ -199,8 +199,8 @@ namespace Loud.Technology.Dje.Sdk
         public async global::System.Threading.Tasks.Task<global::System.IO.Stream> ObterComunicacoesOrgaoPublicoAsStreamAsync(
             global::System.Guid tenantId,
             global::Loud.Technology.Dje.Sdk.ObterComunicacoesOrgaoPublicoStatusCiente statusCiente,
-            global::System.DateTime? dataInicio = default,
-            global::System.DateTime? dataFim = default,
+            string? dataInicio = default,
+            string? dataFim = default,
             string? numeroProcesso = default,
             global::Loud.Technology.Dje.Sdk.ObterComunicacoesOrgaoPublicoTipoComunicacao? tipoComunicacao = default,
             string? assunto = default,
@@ -266,8 +266,8 @@ namespace Loud.Technology.Dje.Sdk
                                 path: "/api/v1/comunicacoes/orgaos-publicos",
                                 baseUri: HttpClient.BaseAddress);
                             __pathBuilder
-                                .AddOptionalParameter("dataInicio", dataInicio?.ToString("yyyy-MM-ddTHH:mm:ssZ"))
-                                .AddOptionalParameter("dataFim", dataFim?.ToString("yyyy-MM-ddTHH:mm:ssZ"))
+                                .AddOptionalParameter("dataInicio", dataInicio)
+                                .AddOptionalParameter("dataFim", dataFim)
                                 .AddOptionalParameter("numeroProcesso", numeroProcesso)
                                 .AddOptionalParameter("tipoComunicacao", tipoComunicacao?.ToValueString())
                                 .AddOptionalParameter("assunto", assunto)
@@ -799,8 +799,8 @@ namespace Loud.Technology.Dje.Sdk
         public async global::System.Threading.Tasks.Task<global::Loud.Technology.Dje.Sdk.AutoSDKHttpResponse<byte[]>> ObterComunicacoesOrgaoPublicoAsResponseAsync(
             global::System.Guid tenantId,
             global::Loud.Technology.Dje.Sdk.ObterComunicacoesOrgaoPublicoStatusCiente statusCiente,
-            global::System.DateTime? dataInicio = default,
-            global::System.DateTime? dataFim = default,
+            string? dataInicio = default,
+            string? dataFim = default,
             string? numeroProcesso = default,
             global::Loud.Technology.Dje.Sdk.ObterComunicacoesOrgaoPublicoTipoComunicacao? tipoComunicacao = default,
             string? assunto = default,
@@ -866,8 +866,8 @@ namespace Loud.Technology.Dje.Sdk
                                 path: "/api/v1/comunicacoes/orgaos-publicos",
                                 baseUri: HttpClient.BaseAddress);
                             __pathBuilder
-                                .AddOptionalParameter("dataInicio", dataInicio?.ToString("yyyy-MM-ddTHH:mm:ssZ"))
-                                .AddOptionalParameter("dataFim", dataFim?.ToString("yyyy-MM-ddTHH:mm:ssZ"))
+                                .AddOptionalParameter("dataInicio", dataInicio)
+                                .AddOptionalParameter("dataFim", dataFim)
                                 .AddOptionalParameter("numeroProcesso", numeroProcesso)
                                 .AddOptionalParameter("tipoComunicacao", tipoComunicacao?.ToValueString())
                                 .AddOptionalParameter("assunto", assunto)
