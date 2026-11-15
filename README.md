@@ -114,6 +114,16 @@ using var client = DjeClient.CreateWithClientCredentials(
     innerHandler: new SocketsHttpHandler { PooledConnectionLifetime = TimeSpan.FromMinutes(5) });
 ```
 
+### Share the token between clients
+
+By default each client keeps its token in memory. To share it between clients or processes, pass an `IDjeAccessTokenStore`, such as one over a distributed cache. Before each request, the SDK reads the stored token. It writes a new token when the stored one is missing, expired, or rejected with 401. Keep each token at least until its `ExpiresAt`, which is 60 seconds before the expiry the CNJ declared.
+
+```csharp
+using var client = DjeClient.CreateWithClientCredentials(credentials, tokenStore: myDistributedTokenStore);
+```
+
+The store holds a bearer token, so keep it as private as the client secret.
+
 ### Use a token you already have
 
 The generated constructors take a static Bearer token and do not renew it:

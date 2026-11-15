@@ -11,17 +11,19 @@ internal sealed class DjeAuthenticationHandler : DelegatingHandler
 
     private readonly DjeClientCredentials _credentials;
     private readonly TimeProvider _timeProvider;
+    private readonly IDjeAccessTokenStore _tokenStore;
     private readonly SemaphoreSlim _gate = new(1, 1);
-    private CachedToken? _cached;
 
     public DjeAuthenticationHandler(
         DjeClientCredentials credentials,
         HttpMessageHandler innerHandler,
-        TimeProvider timeProvider)
+        TimeProvider timeProvider,
+        IDjeAccessTokenStore tokenStore)
         : base(innerHandler)
     {
         _credentials = credentials;
         _timeProvider = timeProvider;
+        _tokenStore = tokenStore;
     }
 
     protected override async Task<HttpResponseMessage> SendAsync(
@@ -104,13 +106,15 @@ internal sealed class DjeAuthenticationHandler : DelegatingHandler
         await _gate.WaitAsync(cancellationToken).ConfigureAwait(false);
         try
         {
-            if (_cached is { } cached && cached.Value != rejectedToken && !cached.IsExpired(_timeProvider))
+            var stored = await _tokenStore.GetAsync(cancellationToken).ConfigureAwait(false);
+            if (stored is not null && stored.Value != rejectedToken && _timeProvider.GetUtcNow() < stored.ExpiresAt)
             {
-                return cached.Value;
+                return stored.Value;
             }
 
-            _cached = await RequestTokenAsync(cancellationToken).ConfigureAwait(false);
-            return _cached.Value;
+            var issued = await RequestTokenAsync(cancellationToken).ConfigureAwait(false);
+            await _tokenStore.SetAsync(issued, cancellationToken).ConfigureAwait(false);
+            return issued.Value;
         }
         finally
         {
@@ -118,7 +122,7 @@ internal sealed class DjeAuthenticationHandler : DelegatingHandler
         }
     }
 
-    private async Task<CachedToken> RequestTokenAsync(CancellationToken cancellationToken)
+    private async Task<DjeAccessToken> RequestTokenAsync(CancellationToken cancellationToken)
     {
         List<KeyValuePair<string, string>> form =
         [
@@ -137,7 +141,7 @@ internal sealed class DjeAuthenticationHandler : DelegatingHandler
         };
         request.Headers.TryAddWithoutValidation("User-Agent", _credentials.UserAgent);
 
-        var issuedAt = _timeProvider.GetTimestamp();
+        var issuedAt = _timeProvider.GetUtcNow();
         using var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
 
@@ -150,11 +154,6 @@ internal sealed class DjeAuthenticationHandler : DelegatingHandler
         }
 
         var lifetime = TimeSpan.FromSeconds(token.ExpiresIn ?? DefaultTokenLifetimeSeconds);
-        return new CachedToken(accessToken, issuedAt, lifetime - RenewalMargin);
-    }
-
-    private sealed record CachedToken(string Value, long IssuedAt, TimeSpan Lifetime)
-    {
-        public bool IsExpired(TimeProvider timeProvider) => timeProvider.GetElapsedTime(IssuedAt) >= Lifetime;
+        return new DjeAccessToken { Value = accessToken, ExpiresAt = issuedAt + lifetime - RenewalMargin };
     }
 }
