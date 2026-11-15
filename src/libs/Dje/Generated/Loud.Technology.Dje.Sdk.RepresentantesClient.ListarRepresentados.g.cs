@@ -27,13 +27,13 @@ namespace Loud.Technology.Dje.Sdk
             };
         partial void PrepareListarRepresentadosArguments(
             global::System.Net.Http.HttpClient httpClient,
-            ref global::System.DateTime? dataInicio,
-            ref global::System.DateTime? dataFim);
+            ref global::System.DateTimeOffset? dataInicio,
+            ref global::System.DateTimeOffset? dataFim);
         partial void PrepareListarRepresentadosRequest(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpRequestMessage httpRequestMessage,
-            global::System.DateTime? dataInicio,
-            global::System.DateTime? dataFim);
+            global::System.DateTimeOffset? dataInicio,
+            global::System.DateTimeOffset? dataFim);
         partial void ProcessListarRepresentadosResponse(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpResponseMessage httpResponseMessage);
@@ -53,8 +53,8 @@ namespace Loud.Technology.Dje.Sdk
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Loud.Technology.Dje.Sdk.ApiException"></exception>
         public async global::System.Threading.Tasks.Task<global::Loud.Technology.Dje.Sdk.ComunicacaoProcessualViewModel> ListarRepresentadosAsync(
-            global::System.DateTime? dataInicio = default,
-            global::System.DateTime? dataFim = default,
+            global::System.DateTimeOffset? dataInicio = default,
+            global::System.DateTimeOffset? dataFim = default,
             global::Loud.Technology.Dje.Sdk.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
@@ -77,8 +77,8 @@ namespace Loud.Technology.Dje.Sdk
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Loud.Technology.Dje.Sdk.ApiException"></exception>
         public async global::System.Threading.Tasks.Task<global::Loud.Technology.Dje.Sdk.AutoSDKHttpResponse<global::Loud.Technology.Dje.Sdk.ComunicacaoProcessualViewModel>> ListarRepresentadosAsResponseAsync(
-            global::System.DateTime? dataInicio = default,
-            global::System.DateTime? dataFim = default,
+            global::System.DateTimeOffset? dataInicio = default,
+            global::System.DateTimeOffset? dataFim = default,
             global::Loud.Technology.Dje.Sdk.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
@@ -116,8 +116,8 @@ namespace Loud.Technology.Dje.Sdk
                                 path: "/api/v1/representados",
                                 baseUri: HttpClient.BaseAddress);
                             __pathBuilder
-                                .AddOptionalParameter("dataInicio", dataInicio?.ToString("yyyy-MM-ddTHH:mm:ssZ"))
-                                .AddOptionalParameter("dataFim", dataFim?.ToString("yyyy-MM-ddTHH:mm:ssZ"))
+                                .AddOptionalParameter("dataInicio", dataInicio?.ToString("yyyy-MM-ddTHH:mm:ss.FFFFFFFzzz", global::System.Globalization.CultureInfo.InvariantCulture))
+                                .AddOptionalParameter("dataFim", dataFim?.ToString("yyyy-MM-ddTHH:mm:ss.FFFFFFFzzz", global::System.Globalization.CultureInfo.InvariantCulture))
                                 ;
                             var __path = __pathBuilder.ToString();
                 __path = global::Loud.Technology.Dje.Sdk.AutoSDKRequestOptionsSupport.AppendQueryParameters(

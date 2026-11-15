@@ -14,8 +14,8 @@ namespace Loud.Technology.Dje.Sdk
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Loud.Technology.Dje.Sdk.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::Loud.Technology.Dje.Sdk.ComunicacaoProcessualViewModel> ListarRepresentadosAsync(
-            global::System.DateTime? dataInicio = default,
-            global::System.DateTime? dataFim = default,
+            global::System.DateTimeOffset? dataInicio = default,
+            global::System.DateTimeOffset? dataFim = default,
             global::Loud.Technology.Dje.Sdk.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
@@ -28,8 +28,8 @@ namespace Loud.Technology.Dje.Sdk
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Loud.Technology.Dje.Sdk.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::Loud.Technology.Dje.Sdk.AutoSDKHttpResponse<global::Loud.Technology.Dje.Sdk.ComunicacaoProcessualViewModel>> ListarRepresentadosAsResponseAsync(
-            global::System.DateTime? dataInicio = default,
-            global::System.DateTime? dataFim = default,
+            global::System.DateTimeOffset? dataInicio = default,
+            global::System.DateTimeOffset? dataFim = default,
             global::Loud.Technology.Dje.Sdk.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }

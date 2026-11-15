@@ -27,3 +27,5 @@ autosdk generate openapi.json \
   --security-scheme Http:Header:Bearer \
   --api-key-env DJE_ACCESS_TOKEN \
   --exclude-deprecated-operations
+
+python3 -I use-date-time-offset.py Generated
