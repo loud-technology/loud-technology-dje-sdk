@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/libs/">
+    <File Path="src/libs/Directory.Build.props" />
+    <Project Path="src/libs/Dje/Loud.Technology.Dje.Sdk.csproj" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+    <File Path="src/Directory.Build.props" />
+  </Folder>
+</Solution>
